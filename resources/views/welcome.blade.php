@@ -25,12 +25,20 @@
         <div class="container my-5">
             <div class="row text-center">
                 <div class="col-12">
-                    <a href="" class="btn btn-primary">English</a>
-                    <a href="" class="btn btn-info">Arabic</a>
+                    
+                    {{-- Splitting url so that locale can be set to url and after redirection stays on the same page --}}
+                    @php
+                        $url = url()->full();
+                        $pos = strpos($url, app()->getLocale());
+                    @endphp
+
+                    <a href="{{ substr_replace($url,"en",$pos,2) }}" class="btn btn-info"> English</a>
+                    <a href="{{ substr_replace($url,"ar",$pos,2) }}" class="btn btn-primary"> Arabic</a>
+
                 </div>
                 <div class="col-12 mt-5">
-                    <h1>Hello! Welcome.</h1>
-                    <p>Laravel Localization is Working</p>
+                    <h1>{{ __('welcome.title') }}</h1>
+                    <p>{{ __('welcome.subtitle') }}</p>
                 </div>
             </div>
         </div>
