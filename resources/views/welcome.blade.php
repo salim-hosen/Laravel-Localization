@@ -28,12 +28,12 @@
                     
                     {{-- Splitting url so that locale can be set to url and after redirection stays on the same page --}}
                     @php
-                        $url = url()->full();
-                        $pos = strpos($url, app()->getLocale());
+                        $full_url = url()->full();
+                        $locale_url = url(app()->getLocale());
                     @endphp
 
-                    <a href="{{ substr_replace($url,"en",$pos,2) }}" class="btn btn-info"> English</a>
-                    <a href="{{ substr_replace($url,"ar",$pos,2) }}" class="btn btn-primary"> Arabic</a>
+                    <a href="{{ str_replace($locale_url, url("en"), $full_url) }}" class="btn btn-info"> English</a>
+                    <a href="{{ str_replace($locale_url, url("ar"), $full_url) }}" class="btn btn-primary"> Arabic</a>
 
                 </div>
                 <div class="col-12 mt-5">
